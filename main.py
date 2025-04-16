@@ -3,60 +3,8 @@ from datetime import datetime
 from random import choice, randint, shuffle
 
 
-def generate_name():
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
-               'v',
-               'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
-               'R',
-               'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
-
-    name_letters = [choice(letters) for _ in range(randint(8, 10))]
-    name_numbers = [choice(numbers) for _ in range(randint(2, 4))]
-
-    password_list = name_letters + name_numbers
-    shuffle(password_list)
-
-    name = str("".join(password_list))
-    return name
-
-
-def get_lat(country, city):
-    url = "https://nominatim.openstreetmap.org/search"
-    params = {
-        'q': f"{city},{country}",
-        'format': 'json',
-        'limit': 1
-    }
-    headers = {
-        'User-Agent': generate_name()
-    }
-    response = requests.get(url, params=params, headers=headers)
-    data = response.json()
-
-    if data:
-        return data[0]['lat']
-
-
-def get_lon(country, city):
-    url = "https://nominatim.openstreetmap.org/search"
-    params = {
-        'q': f"{city},{country}",
-        'format': 'json',
-        'limit': 1
-    }
-    headers = {
-        'User-Agent': generate_name()
-    }
-    response = requests.get(url, params=params, headers=headers)
-    data = response.json()
-
-    if data:
-        return data[0]['lon']
-
-
 # Ask for user inputs: location and day
+
 def SENSOR():
     Check = str(input("What do you want to check weather or earthquake\nweather/earthquake: "))
 
@@ -108,6 +56,38 @@ def SENSOR():
             SENSOR()
 
     elif Check == "weather":
+        def get_lat(country1, city1):
+            url1 = "https://nominatim.openstreetmap.org/search"
+            params = {
+                'q': f"{city1},{country1}",
+                'format': 'json',
+                'limit': 1
+            }
+            headers = {
+                'User-Agent': "generate_name()"
+            }
+            response1 = requests.get(url1, params=params, headers=headers)
+            data1 = response1.json()
+
+            if data1:
+                return data1[0]['lat']
+
+        def get_lon(country2, city2):
+            url2 = "https://nominatim.openstreetmap.org/search"
+            params = {
+                'q': f"{city2},{country2}",
+                'format': 'json',
+                'limit': 1
+            }
+            headers = {
+                'User-Agent': "generate_name()"
+            }
+            response2 = requests.get(url2, params=params, headers=headers)
+            data2 = response2.json()
+
+            if data2:
+                return data2[0]['lon']
+
         api_key = "aee6cad5c976956d9fb9bde4ce6d27ef"
 
         print("")
